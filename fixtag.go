@@ -108,7 +108,7 @@ If not given, [tagfile] defaults to "tags".
 func mustScanTagFile(tagfile string) *bufio.Scanner {
 	f, err := os.Open(tagfile)
 	if err != nil {
-		log.Fatal(tagfile, err)
+		log.Fatal(err)
 	}
 
 	return bufio.NewScanner(f)
