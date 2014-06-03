@@ -91,7 +91,7 @@ func (o *Tag) UsesRegex() bool {
 	return o.Locator()[0] == '/'
 }
 
-var structTagRe = regexp.MustCompile(`^/\^typedef\s+struct\s+__`)
+var structTagRe = regexp.MustCompile(`^/\^typedef\s+struct\b`)
 var whiteSpaceRe = regexp.MustCompilePOSIX(`  *`)
 
 func (o *Tag) IsStructTag() bool {
