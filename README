@@ -1,0 +1,24 @@
+TL;DR: Vim doesn't seem to have support for jumping the the typeref
+immediately, hence this program.
+
+The full story
+--------------
+
+Some C source files has many of the following struct typedef patterns:
+
+    typedef struct __some_name Name;
+
+    struct __some_name {
+
+    };
+
+Which generates (possibly annoying) tags like this:
+
+    Name      file.h  /^typedef struct __some_name Name/      t       typeref:struct:__some_name
+    __some_name       file.h  /struct __some_name {/  s
+
+fixtag modifies the entries such that the former's locator is the
+same as the latter's:
+
+    Name      file.h  /^struct __some_name {/ t       typeref:struct:__some_name
+    __some_name       file.h  /^struct __some_name {/ s
