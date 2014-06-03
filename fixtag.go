@@ -64,9 +64,7 @@ func (t *Tags) Tags() []*Tag {
 }
 
 func NewTag(line string) *Tag {
-	return &Tag{
-		items: strings.Split(line, "\t"),
-	}
+	return &Tag{strings.Split(line, "\t")}
 }
 
 func (o *Tag) String() string {
