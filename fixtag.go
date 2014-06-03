@@ -17,7 +17,7 @@ type StructTag struct {
 	*Tag
 }
 
-func NewStructTag(t *Tag, idx int) *StructTag {
+func NewStructTag(t *Tag) *StructTag {
 	if !t.IsStructTag() {
 		return nil
 	}
@@ -141,8 +141,8 @@ func mustGetTagFile() string {
 func main() {
 	tags := NewTagsFromFile(mustGetTagFile())
 
-	for i, tag := range tags.Tags() {
-		st := NewStructTag(tag, i)
+	for _, tag := range tags.Tags() {
+		st := NewStructTag(tag)
 		if st == nil {
 			fmt.Println(tag)
 			continue
