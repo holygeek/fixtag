@@ -4,7 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-MyStruct	foo.c	/^struct __my_struct {$/;"	t	typeref:struct:__my_struct	file:
-SomeOther	foo.c	/^struct __some_other_struct {$/;"	t	typeref:struct:__some_other_struct	file:
-__my_struct	foo.c	/^struct __my_struct {$/;"	s	file:
-__some_other_struct	foo.c	/^struct __some_other_struct {$/;"	s	file:
+MyStruct	001.c	/^struct __my_struct {$/;"	t	typeref:struct:__my_struct	file:
+SomeOther	001.c	/^struct __some_other_struct {$/;"	t	typeref:struct:__some_other_struct	file:
+__my_struct	001.c	/^struct __my_struct {$/;"	s	file:
+__some_other_struct	001.c	/^struct __some_other_struct {$/;"	s	file:

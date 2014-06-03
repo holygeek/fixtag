@@ -1,8 +1,12 @@
 #!/bin/sh
 cd "`dirname $0`"
-ctags foo.c
-../fixtag tags > tags.new
-if ! diff tags.expected tags.new >/dev/null; then
+
+tags_fixed=tags.001.new
+tags_expected=tags.001.expected
+
+ctags 001.c
+../fixtag tags > $tags_fixed
+if ! diff $tags_expected $tags_fixed >/dev/null; then
 	echo "not ok 1 - basic"
 else
 	echo "ok 1 - basic"
