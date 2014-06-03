@@ -107,7 +107,27 @@ If not given, [tagfile] defaults to "tags".
 `)
 }
 
-func mustScanTagFile() *bufio.Scanner {
+func mustScanTagFile(tagfile string) *bufio.Scanner {
+	f, err := os.Open(tagfile)
+	if err != nil {
+		log.Fatal(tagfile, err)
+	}
+
+	return bufio.NewScanner(f)
+}
+
+func NewTagsFromFile(tagfile string) *Tags {
+	scanner := mustScanTagFile(tagfile)
+
+	var tags = NewTags()
+	for scanner.Scan() {
+		line := scanner.Text()
+		tags.Add(line)
+	}
+	return tags
+}
+
+func mustGetTagFile() string {
 	if len(os.Args) > 2 {
 		usage()
 		os.Exit(1)
@@ -117,22 +137,11 @@ func mustScanTagFile() *bufio.Scanner {
 	if len(os.Args) == 2 {
 		tagfile = os.Args[1]
 	}
-
-	f, err := os.Open(tagfile)
-	if err != nil {
-		log.Fatal(tagfile, err)
-	}
-	return bufio.NewScanner(f)
+	return tagfile
 }
 
 func main() {
-	scanner := mustScanTagFile()
-
-	var tags = NewTags()
-	for scanner.Scan() {
-		line := scanner.Text()
-		tags.Add(line)
-	}
+	tags := NewTagsFromFile(mustGetTagFile())
 
 	for i, tag := range tags.Tags() {
 		st := NewStructTag(tag, i)
@@ -148,8 +157,7 @@ func main() {
 			}
 		}
 		if len(matches) == 1 {
-			tag := matches[0]
-			st.SetLocator(tag.Locator())
+			st.SetLocator(matches[0].Locator())
 		}
 		fmt.Println(st)
 	}
